@@ -1,0 +1,6 @@
+services:
+  bdd:
+    image: mariadb:11.7.2
+    container_name: bdd-java
+    restart: unless-stopped
+
