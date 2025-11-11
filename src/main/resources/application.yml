@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: live java web
+  datasource:
+    url: jdbc:mariadb://localhost:3307/live
+    username: root
+    password: supermotdepasse
+    driver-class-name: org.mariadb.jdbc.Driver
