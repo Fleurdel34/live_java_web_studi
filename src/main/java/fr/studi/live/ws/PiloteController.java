@@ -32,8 +32,25 @@ public class PiloteController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> createPost(@RequestBody Pilote monPilote){
+    public ResponseEntity<Object> createPilote(@RequestBody Pilote monPilote){
         piloteService.createPilote(monPilote);
        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deletePiloteById(@PathVariable Long id){
+        boolean isDelete = piloteService.deletePiloteById(id);
+
+        return isDelete ?
+                ResponseEntity.status(HttpStatus.OK).build() :
+                ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updatePilote(@PathVariable Long id, @RequestBody Pilote newPilote){
+        piloteService.updatePilote(id,newPilote);
+        return ResponseEntity.status(HttpStatus.OK).build();
+
+    }
+
 }

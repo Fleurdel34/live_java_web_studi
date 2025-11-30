@@ -4,8 +4,6 @@ import fr.studi.live.pojo.Pilote;
 import fr.studi.live.repository.PiloteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -13,6 +11,7 @@ public class PiloteService {
 
     @Autowired
     private PiloteRepository piloteRepository;
+
 
 
     public List<Pilote> getAllPilote(){
@@ -24,5 +23,25 @@ public class PiloteService {
     }
 
     public void createPilote(Pilote monPilote) {
+        piloteRepository.save(monPilote);
+    }
+
+    public boolean deletePiloteById(Long id) {
+        boolean toDelete = piloteRepository.existsById(id);
+        if(toDelete) {
+            piloteRepository.deleteById(id);
+        }
+        return toDelete;
+    }
+
+    public void updatePilote(Long id, Pilote newPilote) {
+        Pilote oldPilote = this.getPiloteById(id);
+        if(oldPilote != null){
+            oldPilote.setNom(newPilote.getNom());
+            oldPilote.setPrenom(newPilote.getPrenom());
+            oldPilote.setPays(newPilote.getPays());
+            oldPilote.setNumero(newPilote.getNumero());
+            piloteRepository.save(oldPilote);
+        }
     }
 }
