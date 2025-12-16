@@ -1,13 +1,10 @@
 package fr.studi.live.security.models;
 
 import jakarta.persistence.*;
-import lombok.Getter;
+
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
-@Getter
-@Setter
 @NoArgsConstructor
 public class Role {
 
@@ -22,4 +19,19 @@ public class Role {
         this.name =name;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public ERole getName() {
+        return name;
+    }
+
+    public void setName(ERole name) {
+        this.name = name;
+    }
 }

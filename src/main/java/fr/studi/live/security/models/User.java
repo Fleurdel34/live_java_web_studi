@@ -2,9 +2,6 @@ package fr.studi.live.security.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,9 +10,6 @@ import java.util.Set;
 @Table(uniqueConstraints = {
         @UniqueConstraint(columnNames = "username")
 })
-@Getter
-@Setter
-@NoArgsConstructor
 public class User {
   
     @Id
@@ -26,9 +20,10 @@ public class User {
     @NotBlank
     private String username;
 
+
     @NotBlank
     @Size(max=120)
-    @Pattern(regexp = "(?=.*\\\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,}", message = "Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.")
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,}$", message = "Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.")
     private String password;
 
     @ManyToMany(fetch= FetchType.LAZY)
@@ -43,4 +38,38 @@ public class User {
     }
 
 
+    public User() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 }
